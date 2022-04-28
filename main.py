@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 from models import *
 from routes.tren import tren
 
@@ -18,4 +19,7 @@ app.include_router(tren)
 async def read_root():
     return {"Hello": "World"}
 
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=80)
     
