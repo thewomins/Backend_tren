@@ -6,7 +6,7 @@ DATABASE_URI = config.get("DATABASE_URI")
 
 client = motor.motor_asyncio.AsyncIOMotorClient(DATABASE_URI)
 #nombre database
-database = client.prueba
+database = client.tren_app
 #nombre coleccion similar a tablas
 #collection = database.trenes
 def get_database():
