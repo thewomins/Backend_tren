@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 from models import *
 from routes.tren import tren
+from routes.admin import admin
 
 
 from dotenv import dotenv_values
@@ -13,6 +14,7 @@ app = FastAPI(title="FastAPI & Mongo CRUD",
 )
 
 app.include_router(tren)
+app.include_router(admin)
 
 
 @app.get("/")
