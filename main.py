@@ -22,4 +22,9 @@ async def read_root():
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=80)
-    
+
+
+#
+#hacer que se puedan buscar estaciones intermedias en las listas de las lineas probablemente quick sort????
+#añadir a base de datos los vagones
+#

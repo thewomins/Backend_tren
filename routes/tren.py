@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from schemas.tren import *
 from models.tren import Tren
 from config.database import get_database
+from __future__ import annotations
 
 tren = APIRouter()
 collection = get_database().tren
