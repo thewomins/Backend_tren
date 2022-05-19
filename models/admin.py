@@ -2,4 +2,4 @@ from pydantic import BaseModel
 
 class Admin(BaseModel):
     email:str
-    password: int
+    password:str

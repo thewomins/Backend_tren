@@ -3,6 +3,8 @@ import uvicorn
 from models import *
 from routes.tren import tren
 from routes.admin import admin
+from routes.estaciones import estaciones
+from routes.lineas import linea
 
 
 from dotenv import dotenv_values
@@ -15,15 +17,16 @@ app = FastAPI(title="FastAPI & Mongo CRUD",
 
 app.include_router(tren)
 app.include_router(admin)
-
+app.include_router(estaciones)
+app.include_router(linea)
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+  return {"Hello": "World"}
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=80)
+  uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 
 
 #

@@ -21,7 +21,7 @@ async def post_tren(tren:Tren):
     result = await collection.insert_one(document)
     return document
     
-#cambiar para no acutializar id y demas elemntos
+#cambiar para no actualizar id y demas elementos
 @tren.put("/tren{id}",response_model=list[Tren])
 async def put_tren(tren:Tren,id:str):
     await collection.update_one({"numero_serie":id},{"$set":tren.dict()})
