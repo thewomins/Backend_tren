@@ -20,16 +20,13 @@ async def post_admin(admin:Admin):
     document = admin.dict()
     result = await collection.insert_one(document)
     return document
-    
-#cambiar para actulizar email y password
 
-#@admin.put("/admin{id}",response_model=list[Admin])
-#async def put_tren(admin:Admin,id:str):
-#    await collection.update_one({"numero_serie":id},{"$set":admin.dict()})
-#    return await collection.find_one({"numero_serie":id})
+@admin.put("/admin-{email}",response_model=Admin)
+async def put_tren(admin:Admin,email:str):
+    await collection.update_one({"email":email},{"$set":admin.dict()})
+    return await collection.find_one({"email":admin.email})
 
-
-@admin.delete("/admin{id}")
-async def delete_admin(id:str):
-    await collection.delete_one({"email":id})
+@admin.delete("/admin-{email}")
+async def delete_admin(email:str):
+    await collection.delete_one({"email":email})
     return True

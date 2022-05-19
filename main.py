@@ -10,8 +10,8 @@ from routes.lineas import linea
 from dotenv import dotenv_values
 import os
 
-app = FastAPI(title="FastAPI & Mongo CRUD",
-  description="this is a simple REST API using fastapi and mongodb",
+app = FastAPI(title="Api [nombre app]",
+  description="this is a REST API using fastapi and mongodb",
   version="0.0.1"
 )
 
