@@ -1,6 +1,25 @@
+from datetime import date
+from typing import Dict, Union
 from pydantic import BaseModel
+import json
+
+from models.estaciones import Estaciones
+
+class Horario(BaseModel):
+    salida:date
+    llegada:date
+    id_tren:str
 
 class Linea(BaseModel):
     nombre_linea:str
-    estaciones:list[str,int,int]
-    horarios:list[str,str,str]
+    estaciones:list[Estaciones]
+    horarios:list[Horario]
+
+m1 = Linea(nombre_linea="nombre",
+    estaciones=[{'nombre':"estacion","ciudad":"cuidad",'kilometro':32}],
+    horarios=[{'salida':"2022-05-23",
+                'llegada':"2022-05-23",
+                'id_tren':"id_tren"}]
+)
+
+print(m1.dict())
