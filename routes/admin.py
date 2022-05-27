@@ -1,6 +1,7 @@
 from typing import Collection
+from urllib import response
 from fastapi import APIRouter
-from schemas.admin import *
+from Controllers.adminController import adminController
 from models.admin import Admin
 from config.database import get_database
 
@@ -9,24 +10,16 @@ collection = get_database().admin
 
 @admin.get("/admin",response_model=list[Admin])
 async def get_admin():
-    admins=[]
-    cursor = collection.find({})
-    async for document in cursor:
-        admins.append(Admin(**document))#parsea el documento al modelo ya establecido
-    return admins
+    return await adminController.admin_list_entity()
 
-@admin.post("/admin", response_model=Admin)
+@admin.post("/admin/post", response_model=Admin)
 async def post_admin(admin:Admin):
-    document = admin.dict()
-    result = await collection.insert_one(document)
-    return document
+    return adminController.post_admin(admin)
 
-@admin.put("/admin-{email}",response_model=Admin)
-async def put_tren(admin:Admin,email:str):
-    await collection.update_one({"email":email},{"$set":admin.dict()})
-    return await collection.find_one({"email":admin.email})
+@admin.put("/admin/put-{email}",response_model=Admin)
+async def put_admin(admin:Admin,email:str):
+    return adminController.update_admin(admin,email)
 
-@admin.delete("/admin-{email}")
+@admin.delete("/admin/delete-{email}",response_model=bool)
 async def delete_admin(email:str):
-    await collection.delete_one({"email":email})
-    return True
+    return adminController.delete_admin(email)

@@ -15,6 +15,7 @@ class Linea(BaseModel):
     estaciones:list[Estaciones]
     horarios:list[Horario]
 
+#test caja blanca clase
 m1 = Linea(nombre_linea="nombre",
     estaciones=[{'nombre':"estacion","ciudad":"cuidad",'kilometro':32}],
     horarios=[{'salida':"2022-05-23",
