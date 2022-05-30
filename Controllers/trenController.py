@@ -8,7 +8,7 @@ class trenController(metaclass=SingletonMeta):
 
     #devuelve 1 entidad con sus atributos
     async def tren_entity(numero_serie:str) -> dict:
-        cursor = await collection.find_one({"numero_serie":numero_serie})
+        cursor = collection.find_one({"numero_serie":numero_serie})
         #print(cursor)
         return cursor
 
@@ -20,15 +20,16 @@ class trenController(metaclass=SingletonMeta):
             trenes.append(Tren(**document))#parsea el documento al modelo ya establecido
         return trenes
 
-    async def post_tren(tren:Tren) -> bool:
+    async def post_tren(tren) ->dict:
         document = tren.dict()
-        result = await collection.insert_one(document)
-        return result.acknowledged
+        #print(document)
+        result = collection.insert_one(document)
+        return document
 
     async def put_tren(tren:Tren,id:str) ->dict:
-        await collection.update_one({"numero_serie":id},{"$set":{"velocidad":tren.velocidad,"asientos":tren.asientos}})
-        return await collection.find_one({"numero_serie":id})
+        collection.update_one({"numero_serie":id},{"$set":{"velocidad":tren.velocidad,"asientos":tren.asientos}})
+        return collection.find_one({"numero_serie":id})
 
     async def delete_tren(id:str) -> bool:
-        await collection.delete_one({"numero_serie":id})
+        collection.delete_one({"numero_serie":id})
         return True

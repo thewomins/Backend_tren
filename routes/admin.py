@@ -14,12 +14,12 @@ async def get_admin():
 
 @admin.post("/admin/post", response_model=Admin)
 async def post_admin(admin:Admin):
-    return adminController.post_admin(admin)
+    return await adminController.post_admin(admin)
 
 @admin.put("/admin/put-{email}",response_model=Admin)
 async def put_admin(admin:Admin,email:str):
-    return adminController.update_admin(admin,email)
+    return await adminController.update_admin(admin,email)
 
 @admin.delete("/admin/delete-{email}",response_model=bool)
 async def delete_admin(email:str):
-    return adminController.delete_admin(email)
+    return await adminController.delete_admin(email)
