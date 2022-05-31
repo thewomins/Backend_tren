@@ -9,11 +9,11 @@ collection = get_database().estaciones
 
 @estaciones.get("/estaciones",response_model=list[Estaciones])
 async def get_estaciones():
-    return await estacionesController.estaciones_list_entity();
+    return await estacionesController.estaciones_list_entity()
 
 @estaciones.post("/estaciones/post", response_model=Estaciones)
 async def post_estaciones(estaciones:Estaciones):
-    return await estacionesController.post_estaciones(estaciones);
+    return await estacionesController.post_estaciones(estaciones)
     
 #cambiar para actualizar demas elementos
 @estaciones.put("/estaciones/put-{id}",response_model=Estaciones)
