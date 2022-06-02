@@ -1,4 +1,3 @@
-from typing import Collection
 from fastapi import APIRouter
 from Controllers.lineaController import lineaController
 from models.linea import Linea

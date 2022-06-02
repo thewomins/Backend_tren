@@ -1,7 +1,5 @@
 from datetime import date
-from typing import Dict, Union
 from pydantic import BaseModel
-import json
 
 from models.estaciones import Estaciones
 

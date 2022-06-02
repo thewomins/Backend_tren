@@ -5,19 +5,19 @@ from config.database import get_database
 collection = get_database().lineas
 
 class lineaController(metaclass=SingletonMeta):
-     #devuelve 1 entidad con sus atributos
+    #devuelve 1 entidad con sus atributos
     async def linea_entity(nombre_linea) -> dict:
         cursor = collection.find_one({"nombre_linea":nombre_linea})
         #print(cursor)
         return cursor
 
-    #devuelve una lista de entidades en este caso admin llamando la funcion anterior
+    #devuelve una lista de entidades en este caso Linea
     async def linea_list_entity() -> list:
         lineas=[]
         cursor = collection.find({})
         async for document in cursor:
             lineas.append(Linea(**document))#parsea el documento al modelo ya establecido
-        return await lineas
+        return lineas
 
     async def post_linea(linea:Linea) -> dict:
         document = linea.dict()
