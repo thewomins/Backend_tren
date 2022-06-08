@@ -1,4 +1,3 @@
-from tkinter import E
 from fastapi import APIRouter
 from Controllers.estacionesController import estacionesController
 from models.estaciones import Estaciones

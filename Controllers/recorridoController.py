@@ -1,3 +1,4 @@
+from datetime import datetime
 from models.recorrido import Recorrido
 from config.singleton import SingletonMeta
 from config.database import get_database
@@ -7,8 +8,8 @@ collection = get_database().recorridos
 class recorridosController(metaclass=SingletonMeta):
 
     #devuelve 1 entidad con sus atributos
-    async def recorrido_entity(email) -> dict:
-        cursor = collection.find_one({"email":email})
+    async def recorrido_entity(id:datetime) -> dict:
+        cursor = collection.find_one({"id":id})
         #print(cursor)
         return cursor
 
@@ -25,10 +26,10 @@ class recorridosController(metaclass=SingletonMeta):
         result = collection.insert_one(document)
         return document
 
-    async def update_recorrido(recorrido:Recorrido,email:str) -> dict:
-        collection.update_one({"email":email},{"$set":recorrido.dict()})
-        return await collection.find_one({"email":recorrido.email})
+    async def update_recorrido(recorrido:Recorrido,id:datetime) -> dict:
+        collection.update_one({"id":id},{"$set":recorrido.dict()})
+        return await collection.find_one({"id":recorrido.id})
 
-    async def delete_recorrido(email:str) -> bool:
-        collection.delete_one({"email":email})
+    async def delete_recorrido(id:datetime) -> bool:
+        collection.delete_one({"id":id})
         return True
