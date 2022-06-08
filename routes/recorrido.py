@@ -8,18 +8,18 @@ recorridos = APIRouter()
 collection = get_database().recorridos
 
 @recorridos.get("/recorridos",response_model=list[Recorrido])
-async def get_estaciones():
-    return await recorridosController.estaciones_list_entity()
+async def get_recorrido():
+    return await recorridosController.recorrido_list_entity()
 
 @recorridos.post("/recorridos/post", response_model=Recorrido)
-async def post_estaciones(estaciones:Recorrido):
-    return await recorridosController.post_estaciones(estaciones)
+async def post_recorrido(recorrido:Recorrido):
+    return await recorridosController.post_recorrido(recorrido)
     
 #cambiar para actualizar demas elementos
 @recorridos.put("/recorridos/put-{id}",response_model=Recorrido)
-async def put_estaciones(estaciones:Recorrido,id:datetime):
-    return await recorridosController.put_estaciones(estaciones,id)
+async def put_recorrido(recorrido:Recorrido,id:datetime):
+    return await recorridosController.put_recorrido(recorrido,id)
 
 @recorridos.delete("/recorridos/delete-{id}",response_model=bool)
-async def delete_estaciones(id:datetime):
-    return await recorridosController.delete_estaciones(id)
+async def delete_recorrido(id:datetime):
+    return await recorridosController.delete_recorrido(id)

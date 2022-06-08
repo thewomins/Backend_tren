@@ -24,7 +24,7 @@ class lineaController(metaclass=SingletonMeta):
         result = collection.insert_one(document)
         return document
 
-    async def put_tren(linea:Linea,nombre_linea:str) ->dict:
+    async def put_linea(linea:Linea,nombre_linea:str) ->dict:
         collection.update_one({"nombre_linea":nombre_linea},{"$set":linea.dict()})
         return collection.find_one({"numero_serie":id})
 

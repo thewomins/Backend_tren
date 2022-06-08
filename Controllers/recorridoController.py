@@ -26,7 +26,7 @@ class recorridosController(metaclass=SingletonMeta):
         result = collection.insert_one(document)
         return document
 
-    async def update_recorrido(recorrido:Recorrido,id:datetime) -> dict:
+    async def put_recorrido(recorrido:Recorrido,id:datetime) -> dict:
         collection.update_one({"id":id},{"$set":recorrido.dict()})
         return await collection.find_one({"id":recorrido.id})
 
