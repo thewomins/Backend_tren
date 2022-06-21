@@ -8,8 +8,12 @@ class estacionesController(metaclass=SingletonMeta):
 
     #devuelve 1 entidad con sus atributos
     async def estaciones_entity(nombre:str) -> dict:
-        cursor = collection.find_one({"nombre":nombre})
-        #print(cursor)
+        cursor = await collection.find_one({"nombre":nombre})
+        return cursor
+
+    async def estaciones_entity_by_city(ciudad:str) -> dict:
+        cursor = await collection.find_one({"ciudad":ciudad})
+        cursor.pop("_id")
         return cursor
 
     #devuelve una lista de entidades en este caso estaciones llamando la funcion anterior
@@ -28,8 +32,8 @@ class estacionesController(metaclass=SingletonMeta):
     #cambiar para actualizar demas elementos
     async def put_estaciones(estaciones:Estaciones,id:str) ->dict:
         collection.update_one({"nombre":id},{"$set":estaciones.dict()})
-        return collection.find_one({"nombre":id})
+        return await collection.find_one({"nombre":id})
 
     async def delete_estaciones(id:str) -> bool:
-        collection.delete_one({"nombre":id})
+        result=collection.delete_one({"nombre":id})
         return True
