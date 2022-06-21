@@ -27,8 +27,8 @@ class trenController(metaclass=SingletonMeta):
         return document
 
     async def put_tren(tren:Tren,id:str) ->dict:
-        collection.update_one({"numero_serie":id},{"$set":{"velocidad":tren.velocidad,"asientos":tren.asientos}})
-        return collection.find_one({"numero_serie":id})
+        collection.update_one({"numero_serie":id},{"$set":tren.dict()})
+        return tren.dict()
 
     async def delete_tren(id:str) -> bool:
         collection.delete_one({"numero_serie":id})
