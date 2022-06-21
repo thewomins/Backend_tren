@@ -10,6 +10,10 @@ collection = get_database().estaciones
 async def get_estaciones():
     return await estacionesController.estaciones_list_entity()
 
+@estaciones.get("/estaciones-by-city-{city}",response_model=Estaciones)
+async def get_estaciones(city):
+    return await estacionesController.estaciones_entity_by_city(city)
+
 @estaciones.post("/estaciones/post", response_model=Estaciones)
 async def post_estaciones(estaciones:Estaciones):
     return await estacionesController.post_estaciones(estaciones)
