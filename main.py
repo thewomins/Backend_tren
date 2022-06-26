@@ -6,6 +6,8 @@ from routes.tren import tren
 from routes.admin import admin
 from routes.estaciones import estaciones
 from routes.lineas import linea
+from routes.recorrido import recorridos
+from routes.ticket import ticket
 
 from threading import Thread
 from Controllers.adminController import adminController
@@ -22,6 +24,8 @@ app.include_router(tren)
 app.include_router(admin)
 app.include_router(estaciones)
 app.include_router(linea)
+app.include_router(recorridos)
+app.include_router(ticket)
 
 #se crea la pagina inicial de la app
 @app.get("/")
