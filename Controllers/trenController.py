@@ -8,8 +8,8 @@ class trenController(metaclass=SingletonMeta):
 
     #devuelve 1 entidad con sus atributos
     async def tren_entity(numero_serie:str) -> dict:
-        cursor = collection.find_one({"numero_serie":numero_serie})
-        #print(cursor)
+        cursor = await collection.find_one({"numero_serie":numero_serie})
+        cursor.pop("_id")
         return cursor
 
     #devuelve una lista de entidades en este caso tren llamando la funcion anterior
@@ -27,7 +27,7 @@ class trenController(metaclass=SingletonMeta):
         return document
 
     async def put_tren(tren:Tren,id:str) ->dict:
-        collection.update_one({"numero_serie":id},{"$set":tren.dict()})
+        collection.update({"numero_serie":id},{"$set":tren.dict()})
         return tren.dict()
 
     async def delete_tren(id:str) -> bool:
