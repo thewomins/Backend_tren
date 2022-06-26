@@ -16,7 +16,7 @@ from Controllers.adminController import adminController
 #se instancia fastapi 
 app = FastAPI(title="Api [nombre app]",
   description="this is a REST API using fastapi and mongodb",
-  version="0.5.1"
+  version="0.9.0"
 )
 
 #se incuyen las rutas en la instancia de fastapi
