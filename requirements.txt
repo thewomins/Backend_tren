@@ -3,3 +3,5 @@ motor
 uvicorn
 python-dotenv
 qrcode[pil]
+passlib[bcrypt] 
+PyJWT

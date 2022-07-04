@@ -1,7 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from Controllers.estacionesController import estacionesController
 from models.estaciones import Estaciones
 from config.database import get_database
+from models.auth import Hasher
+
+hasher = Hasher()
 
 estaciones = APIRouter()
 collection = get_database().estaciones
@@ -15,7 +18,7 @@ async def get_estaciones(city):
     return await estacionesController.estaciones_entity_by_city(city)
 
 @estaciones.post("/estaciones/post", response_model=Estaciones)
-async def post_estaciones(estaciones:Estaciones):
+async def post_estaciones(estaciones:Estaciones=Depends(hasher.auth_wrapper)):
     return await estacionesController.post_estaciones(estaciones)
     
 #cambiar para actualizar demas elementos
