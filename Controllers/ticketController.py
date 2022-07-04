@@ -13,12 +13,12 @@ class ticketController(metaclass=SingletonMeta):
     #devuelve 1 entidad con sus atributos
     async def ticket_entity(id) -> dict:
         cursor = await collection.find_one({"id":id})
-        await cursor.pop("_id")
+        cursor.pop("_id")
         return cursor
 
     async def ticket_entity_by_id_recorrido_y_asiento(id_recorrido:str,n_asiento:int) -> dict:
         cursor = await collection.find_one({"id_recorrido":id_recorrido,"numero_asiento":n_asiento})
-        await cursor.pop("_id")
+        cursor.pop("_id")
         return cursor
 
     async def create_qr(id):
