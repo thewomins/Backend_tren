@@ -33,6 +33,6 @@ async def delete_admin(email:str):
     return await AC.delete_admin(email)
 
 
-@admin.post("/admin/auth",response_model=str)
+@admin.post("/admin/auth",response_model=dict)
 async def auth_admin(admin:Admin):
     return await AC.autenticar_admin(admin)

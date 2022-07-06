@@ -56,12 +56,12 @@ class adminController(metaclass=SingletonMeta):
         admin_db = await self.admin_entity(admin.email)
         if(admin_db):
             admin_db = Admin(**admin_db)
-            print(admin.email,hasher.verify_password(admin.password,admin_db.password))
+            #print(admin.email,hasher.verify_password(admin.password,admin_db.password))
             if(hasher.verify_password(admin.password,admin_db.password)):
                 token = hasher.encode_token(admin.email)
                 await self.update_token_admin(token,admin.email)
-                print(token)
-        return token
+                #print(token)
+        return { 'token': token }
 
     async def close_session(self, admin:Admin):
         await self.update_token_admin("",admin.email)

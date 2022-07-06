@@ -1,3 +1,4 @@
+from fastapi import Depends
 from models.estaciones import Estaciones
 from config.singleton import SingletonMeta
 from config.database import get_database

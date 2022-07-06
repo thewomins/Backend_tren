@@ -17,8 +17,8 @@ async def get_estaciones():
 async def get_estaciones(city):
     return await estacionesController.estaciones_entity_by_city(city)
 
-@estaciones.post("/estaciones/post", response_model=Estaciones)
-async def post_estaciones(estaciones:Estaciones=Depends(hasher.auth_wrapper)):
+@estaciones.post("/estaciones/post", response_model=Estaciones ,dependencies=[Depends(hasher.auth_wrapper)])
+async def post_estaciones(estaciones:Estaciones):
     return await estacionesController.post_estaciones(estaciones)
     
 #cambiar para actualizar demas elementos
