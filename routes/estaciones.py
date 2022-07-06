@@ -22,10 +22,10 @@ async def post_estaciones(estaciones:Estaciones):
     return await estacionesController.post_estaciones(estaciones)
     
 #cambiar para actualizar demas elementos
-@estaciones.put("/estaciones/put-{id}",response_model=Estaciones)
+@estaciones.put("/estaciones/put-{id}",response_model=Estaciones ,dependencies=[Depends(hasher.auth_wrapper)])
 async def put_estaciones(estaciones:Estaciones,id:str):
     return await estacionesController.put_estaciones(estaciones,id)
 
-@estaciones.delete("/estaciones/delete-{id}",response_model=bool)
+@estaciones.delete("/estaciones/delete-{id}",response_model=bool ,dependencies=[Depends(hasher.auth_wrapper)])
 async def delete_estaciones(id:str):
     return await estacionesController.delete_estaciones(id)

@@ -1,6 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from Controllers.lineaController import lineaController
 from models.linea import Linea
+from models.auth import Hasher
+
+hasher = Hasher()
 
 linea = APIRouter()
 lc = lineaController()
@@ -13,14 +16,14 @@ async def get_linea():
 async def get_linea(estacion):
     return await lc.linea_list_by_estacion(estacion)
 
-@linea.post("/linea/post", response_model=Linea)
+@linea.post("/linea/post", response_model=Linea ,dependencies=[Depends(hasher.auth_wrapper)])
 async def post_linea(linea:Linea):
     return await lc.post_linea(linea)
     
-@linea.put("/linea/put-{nombre_linea}",response_model=Linea)
+@linea.put("/linea/put-{nombre_linea}",response_model=Linea ,dependencies=[Depends(hasher.auth_wrapper)])
 async def put_linea(linea:Linea,nombre_linea:str):
     return await lc.put_linea(linea, nombre_linea)
 
-@linea.delete("/linea/delete-{id}")
+@linea.delete("/linea/delete-{id}" ,dependencies=[Depends(hasher.auth_wrapper)])
 async def delete_linea(id:str):
     return await lc.delete_linea(id)
