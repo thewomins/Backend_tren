@@ -32,7 +32,10 @@ async def put_admin(admin:Admin,email:str):
 async def delete_admin(email:str):
     return await AC.delete_admin(email)
 
-
 @admin.post("/admin/auth",response_model=dict)
 async def auth_admin(admin:Admin):
     return await AC.autenticar_admin(admin)
+
+@admin.get("/admin/is-auth-{token}",response_model=dict)
+async def is_auth(token:str):
+    return await AC.is_auth(token)

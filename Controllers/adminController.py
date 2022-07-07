@@ -66,4 +66,11 @@ class adminController(metaclass=SingletonMeta):
     async def close_session(self, admin:Admin):
         await self.update_token_admin("",admin.email)
         return True
+
+    async def is_auth(self,token):
+        print(token)
+        if(hasher.decode_token(token)):
+            return {"detail" : True}
+        return {"detail" : False}
+    
     
