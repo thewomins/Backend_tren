@@ -12,7 +12,8 @@ class adminController(metaclass=SingletonMeta):
     #devuelve 1 entidad admin con sus atributos
     async def admin_entity(self, email) -> dict:
         cursor = await collection.find_one({"email":email}) #se busca por email el admin en la base de datos
-        cursor.pop("_id")
+        if(cursor):
+            cursor.pop("_id")
         return cursor
 
     #devuelve una lista de entidades en este caso admin 
@@ -54,6 +55,7 @@ class adminController(metaclass=SingletonMeta):
     #handle errores en autenticacion
     async def autenticar_admin(self, admin:Admin):
         admin_db = await self.admin_entity(admin.email)
+        token=""
         if(admin_db):
             admin_db = Admin(**admin_db)
             #print(admin.email,hasher.verify_password(admin.password,admin_db.password))

@@ -14,7 +14,8 @@ class estacionesController(metaclass=SingletonMeta):
 
     async def estaciones_entity_by_city(ciudad:str) -> dict:
         cursor = await collection.find_one({"ciudad":ciudad})
-        cursor.pop("_id")
+        if(cursor):
+            cursor.pop("_id")
         return cursor
 
     #devuelve una lista de entidades en este caso estaciones llamando la funcion anterior
